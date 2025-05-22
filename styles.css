@@ -1,0 +1,10 @@
+/* colors */
+:root{
+    --pink: FFDAE1;
+    --borderpurple: 9989D8; 
+    --lavender:E9E4FF;
+}
+h1{
+    color: var(--borderpurple);
+    font-family: "Pixelify Sans";
+}

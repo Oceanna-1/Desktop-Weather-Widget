@@ -17,26 +17,23 @@ function generateWeather(){
 
 function timeOfDay(){
     let hour = (new Date).getHours();
-    let timeOfDay = 0;
+    let timeOfDay;
     switch (hour){
-        case (hour >= 4 && hour < 7):
+        // day time - 7am up to (not including) 7pm
+        case (hour <= 7 && hour > 19):
             timeOfDay = 1;
             break;
-        case (hour >= 7 && hour < 7 && hour < 12):
+        // night time - 9pm up to (not including) 5am
+        case (hour <= 21 && hour > 5):
             timeOfDay = 2;
             break;
-        case (hour >=12 && hour < 16):
-            timeOfDay = 3;
-            break;
-        case (hour >=16 && hour < 20):
-            timeOfDay = 4;
-            break;
         default:
-            timeOfDay = 5;
+            timeOfDay = 3;
             break;
     }
     return timeOfDay;
 }
+
 function createWindow () {
   const win = new BrowserWindow({
     width: 300,
