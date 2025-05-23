@@ -1,10 +1,81 @@
-/* colors */
+/* colors and base sizes*/
 :root{
-    --pink: FFDAE1;
-    --borderpurple: 9989D8; 
-    --lavender:E9E4FF;
+    --pink: #FFDAE1;
+    --borderpurple: #9989D8; 
+    --lavender: #E9E4FF;
+    --art-zone: 200px;
 }
-h1{
+*{
+    padding-top: 0;
+    margin-top: 0;
+}
+
+/* custom title bar */
+.titlebar{
+    -webkit-app-region: drag;
+    display: flex;
+    flex-direction: row;
+    padding: 3px;
+    border-bottom: 1px solid var(--borderpurple);
+}
+.titlebar-btn{
+    display: flex;
+    flex-direction: row;
+}
+.button{
+    height: 25px;
+    width: 25px;
+    background-color: #E9E4FF;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+/* body */
+body {
+    background-color: var(--pink);
+}
+
+.display{
+    display: flex;
+    flex-direction: row;  
+}
+/* headers */
+h2{
     color: var(--borderpurple);
     font-family: "Pixelify Sans";
+    font-weight: 50;
+    
+}
+
+/* section for displaying pixel art */
+.art-display{
+    height: var(--art-zone);
+    width: var(--art-zone);
+    border: 2px solid var(--borderpurple);
+    border-radius: 5%;
+    background-color: var(--lavender);
+    margin: auto;
+}
+
+
+/* background displaying time of day */
+.sky-background{
+    height: var(--art-zone);
+    width: var(--art-zone);
+}
+
+/* background displaying seasonal trees */
+.season-background{
+    height: var(--art-zone);
+    width: var(--art-zone);
+}
+
+/* seasonal icons */
+.icons{
+
+}
+
+/* pixel cat avatar */
+.cat{
+
 }

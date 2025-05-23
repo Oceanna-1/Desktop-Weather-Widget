@@ -1,9 +1,9 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const axios = require('axios');
 
-const path = require('node:path')
-
-
+/**
+ * Makes call to WebAPI to retrieve the current weather in Hamilton, Ontario
+ */
 function generateWeather(){
     ipcMain.on('fetchWeather', async (event, args) => {
       try {
@@ -15,6 +15,10 @@ function generateWeather(){
    });
 }
 
+/**
+ * Quantifies time of day as day, night or dusk / dawn for displaying background
+ * @returns integer of 1,2,3 representating daytime, nightime and dusk/dawn for displaying the correct background 
+ */
 function timeOfDay(){
     let hour = (new Date).getHours();
     console.log("Current Hour is: " + hour)
@@ -38,41 +42,45 @@ function timeOfDay(){
     return timeOfDay;
 }
 
+/**
+ * Creates window for application
+ */
 function createWindow () {
   const win = new BrowserWindow({
-    width: 300,
-    height: 450,
+    width: 350,
+    height: 425,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
     },
+    frame: false,
     titleBarStyle: 'hidden',
-    titleBarOverlay: {
-        color: '#2f3241',
-        symbolColor: '#74b1be',
-        height: 30
-    },
     maximizable: false,
     resizable: false
+    /*
+    titleBarOverlay: {
+      color: '#2f3241',
+      symbolColor: '#74b1be',
+      height: 0
+    },
+    
+    */
   })
 
   win.webContents.openDevTools();
-  win.loadFile('index.html')
+  win.loadFile('index.html');
   generateWeather();
   console.log(timeOfDay());
-  
 }
 
 app.whenReady().then(() => {
   createWindow()
-
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()
     }
   })
 })
-
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
