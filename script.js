@@ -14,7 +14,11 @@ ipcRenderer.on('getWeatherResponse', (event, data) => {
 //sends from the fetchWeather channel
 ipcRenderer.send('fetchWeather'); 
 
-
+/**
+ * Interprets WMOCode as weather condition string
+ * @param {*} WMOCode 
+ * @returns string representation of current weather based on WMOCode
+ */
 function interpretWMO(WMOCode){
     let weather = "";
     switch(WMOCode) {
@@ -30,12 +34,9 @@ function interpretWMO(WMOCode){
         case 3:
             weather =  "Overcast"
             break; 
-        case 45:
+        case (WMOCode >=45 && WMOCode <= 48):
             weather =  "Foggy"
             break;
-        case 48:
-            weather =  "Foggy"
-            break; 
         case 51:
             weather =  "Light Drizzle"
             break;
@@ -60,10 +61,7 @@ function interpretWMO(WMOCode){
         case 65:
             weather =  "Heavily Raining"
             break;
-        case 66:
-            weather =  "Freezing Raining"
-            break;
-        case 67:
+        case (WMOCode == 66 || WMOCode == 67):
             weather =  "Freezing Raining"
             break;
         case 71:

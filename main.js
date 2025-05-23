@@ -17,20 +17,24 @@ function generateWeather(){
 
 function timeOfDay(){
     let hour = (new Date).getHours();
+    console.log("Current Hour is: " + hour)
     let timeOfDay;
-    switch (hour){
+    console.log(hour >= 7 && hour < 19? "true": "false")
         // day time - 7am up to (not including) 7pm
-        case (hour <= 7 && hour > 19):
-            timeOfDay = 1;
-            break;
+        if (hour >= 7 && hour < 19){
+          timeOfDay = 1;
+          console.log("Daytime")
+        }
         // night time - 9pm up to (not including) 5am
-        case (hour <= 21 && hour > 5):
-            timeOfDay = 2;
-            break;
-        default:
-            timeOfDay = 3;
-            break;
-    }
+        else if (hour >= 21 && hour < 5){
+          timeOfDay = 2;
+          console.log("Nighttime")
+        }
+        // catches dusk and dawn - 5am to 6:59am and 7pm to 8:59pm
+        else{
+          timeOfDay = 3;
+          console.log("Dusk or Dawn")
+        }
     return timeOfDay;
 }
 
