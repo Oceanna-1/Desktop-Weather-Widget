@@ -3,11 +3,18 @@
     --pink: #FFDAE1;
     --borderpurple: #9989D8; 
     --lavender: #E9E4FF;
-    --art-zone: 200px;
+    --art-zone: 350px;
 }
+/* set defaults for full app window to 0 margin / padding - allows custom title bar*/
 *{
     padding-top: 0;
     margin-top: 0;
+}
+
+/* body */
+body {
+    background-color: var(--pink);
+    margin: 0;
 }
 
 /* custom title bar */
@@ -15,12 +22,15 @@
     -webkit-app-region: drag;
     display: flex;
     flex-direction: row;
-    padding: 3px;
+    padding: 5px;
     border-bottom: 1px solid var(--borderpurple);
+    justify-content: space-between;
+    align-items: center;
 }
 .titlebar-btn{
     display: flex;
     flex-direction: row;
+    justify-self: flex-end;
 }
 .button{
     height: 25px;
@@ -28,54 +38,69 @@
     background-color: #E9E4FF;
     margin-left: 3px;
     margin-right: 3px;
+    border: 2px solid var(--borderpurple);
+    border-radius: 2px;
+    text-align: center;
+    font-family: "Pixelify Sans";
+    font-size: 15px;
+    color: var(--borderpurple);
 }
 
-/* body */
-body {
-    background-color: var(--pink);
-}
-
+/* main body of application */
 .display{
-    display: flex;
-    flex-direction: row;  
+    display: flex; 
+    flex-direction: column;
 }
 /* headers */
-h2{
+h2 ,p{
     color: var(--borderpurple);
     font-family: "Pixelify Sans";
     font-weight: 50;
-    
+}
+h2{
+    padding: 0;
+    margin: 0;
 }
 
 /* section for displaying pixel art */
 .art-display{
-    height: var(--art-zone);
-    width: var(--art-zone);
-    border: 2px solid var(--borderpurple);
-    border-radius: 5%;
-    background-color: var(--lavender);
-    margin: auto;
+    display: flex;
+    justify-content: center; /* horizontally center */
+    align-items: flex-end;   /* vertically align to bottom */
+    position: relative;
+    width: 100%;
+    border-top: 2px solid var(--borderpurple);
 }
 
 
 /* background displaying time of day */
-.sky-background{
-    height: var(--art-zone);
-    width: var(--art-zone);
+.daytime{
+    background-color: skyblue;
+}
+.dusk{
+    background-color: lightsalmon;
+}
+.nightime{
+    background-color: darkslateblue;
 }
 
 /* background displaying seasonal trees */
 .season-background{
-    height: var(--art-zone);
-    width: var(--art-zone);
+    width: 100%;
+    z-index: 1;
 }
+
+/* pixel cat avatar */
+.cat{
+    position: absolute;
+    width: 75%;
+    bottom: 0;
+    z-index: 2;
+}
+
 
 /* seasonal icons */
 .icons{
 
 }
 
-/* pixel cat avatar */
-.cat{
-
-}

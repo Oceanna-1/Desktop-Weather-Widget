@@ -1,18 +1,41 @@
-const { ipcRenderer } = require('electron');
-
 // select dom elements to display weather
 const temperature = document.getElementById('temp-now');
 const weather = document.getElementById('weather-now');
+const currentSky = document.getElementById("pixel-scene");
 
-// will call axios function to retrieve data
-ipcRenderer.on('getWeatherResponse', (event, data) => {
-    const response = data;
-    temperature.innerHTML = response.current.temperature_2m + response.current_units.temperature_2m;
-    weather.innerHTML = interpretWMO(response.current.weather_code);
+window.electronTime.onWeatherResponse((data) => {
+  temperature.innerHTML = data.current.temperature_2m + data.current_units.temperature_2m;
+  weather.innerHTML = interpretWMO(data.current.weather_code);
 });
+window.electronTime.fetchWeather();
 
-//sends from the fetchWeather channel
-ipcRenderer.send('fetchWeather'); 
+
+/**
+ * Qualifies time of day as day, night or dusk / dawn to be used as the class name for the element background
+ * @returns string representing time of day
+ */
+
+async function setTimeOfDay(){
+    const hour = await window.electronTime.getCurrentHour();
+    console.log("Current Hour is: " + hour)
+    
+    // day time - 7am up to (not including) 7pm
+    if (hour >= 7 && hour < 19){
+        currentSky.className = "art-display daytime";
+        console.log("Daytime")
+    }
+    // night time - 9pm up to (not including) 5am
+    else if (hour >= 21 || hour < 5){
+        currentSky.className = "art-display nightime";
+        console.log("Nighttime")
+    }
+    // catches dusk and dawn - 5am to 6:59am and 7pm to 8:59pm
+    else{
+        currentSky.className = "art-display dusk";
+        console.log("Dusk or Dawn")
+    }
+}
+setTimeOfDay();
 
 /**
  * Interprets WMOCode as weather condition string
@@ -34,7 +57,10 @@ function interpretWMO(WMOCode){
         case 3:
             weather =  "Overcast"
             break; 
-        case (WMOCode >=45 && WMOCode <= 48):
+        case 45:
+            weather =  "Foggy"
+            break;
+        case 48:
             weather =  "Foggy"
             break;
         case 51:
@@ -61,7 +87,10 @@ function interpretWMO(WMOCode){
         case 65:
             weather =  "Heavily Raining"
             break;
-        case (WMOCode == 66 || WMOCode == 67):
+        case 66:
+            weather =  "Freezing Raining"
+            break;
+        case 67:
             weather =  "Freezing Raining"
             break;
         case 71:

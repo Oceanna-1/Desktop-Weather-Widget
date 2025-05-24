@@ -7,23 +7,31 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Pixelify Sans">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script defer src="script.js"></script>
+
 </head>
 <body>
     <div class="titlebar">
-        <div><h2>Weathersby!</h2></div>
-        
-        <!-- <div class="close-btn button"></div> -->
+        <h2>Weathersby!</h2>
         <div class="titlebar-btn">
-            <div class="minimize-btn button"></div>
+            <button class="minimize-btn button">-</button>
+            <button class="close-btn button">x</button>
         </div>
+    </div>
+    <div class="mod-btns">
+        
     </div>
     <div class="display">
         <p>Current weather: <strong id="weather-now"></strong></p>
         <p>Current temperature: <strong id="temp-now"></strong></p>
-        <script src="script.js"></script>
+        
         <div class="season-date"></div>
-        <div class="art-display"></div>
+        <div class="art-display" id="pixel-scene">
+            <img class="season-background" src="assets/season/summer_trees.png" alt="green summer trees">
+            <img class="cat" src="assets/cat/orange_cat.png" alt="orange pixel cat">
+        </div>
         <div class="buttons"></div>
+        
     </div>
     
 </body>
