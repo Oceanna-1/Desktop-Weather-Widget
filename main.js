@@ -16,11 +16,6 @@ function generateWeather(){
    });
 }
 
-function setSky(){
-  ipcMain.handle('getCurrentTime', () => {
-    return (new Date).getHours();
-  });
-}
 
 /**
  * Creates window for application
@@ -28,20 +23,29 @@ function setSky(){
 function createWindow () {
   const win = new BrowserWindow({
     width: 350,
-    height: 500,
+    height: 435,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
     },
     frame: false,
-    titleBarStyle: 'hidden',
+    titleBarStyle: 'customButtonsOnHover',
     maximizable: false,
     resizable: false
   })
   win.loadFile('index.html');
   generateWeather();
-  setSky();
+  //win.webContents.openDevTools()
+  
+
+  //manages custom title bar buttons
+  ipcMain.on('windowMinimize', ()=> {
+    win.minimize();
+  })
+  ipcMain.on('windowClose', ()=> {
+    win.close();
+  })
 }
 
 app.whenReady().then(() => {

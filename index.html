@@ -14,24 +14,29 @@
     <div class="titlebar">
         <h2>Weathersby!</h2>
         <div class="titlebar-btn">
-            <button class="minimize-btn button">-</button>
-            <button class="close-btn button">x</button>
+            <button class="button" id="minimize-btn">-</button>
+            <button class="button" id="close-btn">x</button>
         </div>
     </div>
-    <div class="mod-btns">
         
     </div>
     <div class="display">
-        <p>Current weather: <strong id="weather-now"></strong></p>
-        <p>Current temperature: <strong id="temp-now"></strong></p>
+        <div class="date"><h2 id="currentDate"></h2></div>
         
-        <div class="season-date"></div>
         <div class="art-display" id="pixel-scene">
-            <img class="season-background" src="assets/season/summer_trees.png" alt="green summer trees">
-            <img class="cat" src="assets/cat/orange_cat.png" alt="orange pixel cat">
+            <div class=temp-display>
+                <h3 id="temp-now"></h3>
+            </div>
+            <div class=season-display>
+                <img class = "seasonIcon" id = "seasonIcon" src = "" alt="seasonal icon">
+                <h3 id="currentSeason"></h3>
+            </div>
+            <img class="season-background" id="seasonalTrees" src="assets/season/summer_trees.png" alt="green summer trees">
+            <img class="cat" id="cat" src="assets/cat/orange_cat.png" alt="orange pixel cat">
+            <div class="forecast">
+                <p id="weather-now">Current weather: </p>   
+            </div>
         </div>
-        <div class="buttons"></div>
-        
     </div>
     
 </body>
